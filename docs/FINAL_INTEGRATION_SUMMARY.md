@@ -18,7 +18,7 @@ Task 17 focused on final integration and end-to-end testing of the Adobe Stock I
 
 **Completed:**
 - ✅ Successfully integrated all core modules (analyzers, processors, database, file management)
-- ✅ Fixed missing method implementations in SQLiteProgressTracker:
+- ✅ Fixed missing method implementations in Postgres progress tracker:
   - Added `save_image_result()` method
   - Added `update_session_progress()` method  
   - Added `get_session_results()` method with proper data conversion
@@ -85,7 +85,7 @@ output/
 
 **Resume Capabilities:**
 - Automatic checkpoint saving every 50 processed images (configurable)
-- Session state persistence in SQLite database
+- Session state persistence in PostgreSQL database
 - User prompt for resume vs. restart decision
 - Progress restoration with exact continuation point
 - Error recovery and graceful degradation
@@ -127,7 +127,7 @@ output/
 
 ## Technical Fixes Implemented
 
-### 1. SQLiteProgressTracker Enhancements
+### 1. Progress Tracker Enhancements
 ```python
 # Added missing methods for main application compatibility
 def save_image_result(self, result: ProcessingResult) -> bool

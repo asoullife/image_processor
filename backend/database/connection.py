@@ -7,13 +7,15 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import text
 import os
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
 # Database configuration
+load_dotenv()
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql+asyncpg://admin:admin123@localhost:5432/adobe_stock_processor"
+    "postgresql+asyncpg://postgres:postgres@localhost:5432/stockdb"
 )
 
 # SQLAlchemy setup

@@ -10,7 +10,7 @@ import os
 from unittest.mock import Mock, patch
 
 from backend.core.batch_processor import BatchProcessor
-from backend.core.progress_tracker import SQLiteProgressTracker
+from backend.core.progress_tracker import PostgresProgressTracker
 from backend.core.base import ProcessingResult
 from backend.config.config_loader import ConfigLoader
 
@@ -22,7 +22,6 @@ class TestBatchProcessorIntegration(unittest.TestCase):
         """Set up test fixtures."""
         # Create temporary directory for test files
         self.temp_dir = tempfile.mkdtemp()
-        self.db_path = os.path.join(self.temp_dir, "test.db")
         
         # Create test configuration
         self.config = {
@@ -50,13 +49,11 @@ class TestBatchProcessorIntegration(unittest.TestCase):
         self.batch_processor = BatchProcessor(self.config, self.processing_function)
         
         # Create progress tracker
-        self.progress_tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=2)
+        self.progress_tracker = PostgresProgressTracker(checkpoint_interval=2)
     
     def tearDown(self):
         """Clean up test fixtures."""
         # Clean up temporary files
-        if os.path.exists(self.db_path):
-            os.remove(self.db_path)
         os.rmdir(self.temp_dir)
     
     def test_batch_processor_with_progress_tracking(self):

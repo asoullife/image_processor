@@ -78,7 +78,7 @@ class ImageResult(Base):
     
     # Decision and review
     final_decision = Column(String(20), nullable=False)  # approved/rejected
-    rejection_reasons = Column(JSON, default=list)  # Array of reasons in Thai (JSON for SQLite compatibility)
+    rejection_reasons = Column(JSON, default=list)  # Array of reasons in Thai
     human_override = Column(Boolean, default=False)
     human_review_at = Column(DateTime(timezone=True), nullable=True)
     

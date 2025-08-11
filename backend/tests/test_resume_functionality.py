@@ -12,7 +12,7 @@ import time
 from datetime import datetime
 from unittest.mock import patch, MagicMock
 
-from backend.core.progress_tracker import SQLiteProgressTracker
+from backend.core.progress_tracker import PostgresProgressTracker
 from backend.core.batch_processor import BatchProcessor
 from backend.core.base import ProcessingResult, QualityResult
 from main import ImageProcessor
@@ -28,7 +28,6 @@ class TestResumeFunctionality(unittest.TestCase):
         self.temp_dir = tempfile.mkdtemp()
         self.input_dir = os.path.join(self.temp_dir, 'input')
         self.output_dir = os.path.join(self.temp_dir, 'output')
-        self.db_path = os.path.join(self.temp_dir, 'test.db')
         
         os.makedirs(self.input_dir)
         os.makedirs(self.output_dir)
@@ -42,7 +41,7 @@ class TestResumeFunctionality(unittest.TestCase):
             self.test_images.append(image_path)
         
         # Initialize components
-        self.progress_tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=5)
+        self.progress_tracker = PostgresProgressTracker(checkpoint_interval=5)
         
         # Mock configuration
         self.mock_config = {
@@ -50,9 +49,6 @@ class TestResumeFunctionality(unittest.TestCase):
                 'batch_size': 5,
                 'max_workers': 2,
                 'checkpoint_interval': 5
-            },
-            'database': {
-                'path': self.db_path
             },
             'output': {
                 'images_per_folder': 200
@@ -535,7 +531,7 @@ class TestResumeFunctionality(unittest.TestCase):
         with patch('main.load_config') as mock_load_config:
             mock_config_obj = MagicMock()
             mock_config_obj.dict.return_value = self.mock_config
-            mock_config_obj.database = {'path': self.db_path}
+            mock_config_obj.database = {}
             mock_config_obj.processing.checkpoint_interval = 5
             mock_config_obj.logging = MagicMock()
             mock_load_config.return_value = mock_config_obj
@@ -557,7 +553,7 @@ class TestResumeFunctionality(unittest.TestCase):
         with patch('main.load_config') as mock_load_config:
             mock_config_obj = MagicMock()
             mock_config_obj.dict.return_value = self.mock_config
-            mock_config_obj.database = {'path': self.db_path}
+            mock_config_obj.database = {}
             mock_config_obj.processing.checkpoint_interval = 5
             mock_config_obj.logging = MagicMock()
             mock_load_config.return_value = mock_config_obj

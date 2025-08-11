@@ -140,10 +140,12 @@ class IntegrationTestRunner:
             if result.returncode == 0:
                 logger.info("✅ PostgreSQL available")
             else:
-                logger.warning("⚠️ PostgreSQL not available, using SQLite fallback")
-                
+                logger.error("❌ PostgreSQL not available")
+                raise RuntimeError("PostgreSQL not available")
+
         except (subprocess.TimeoutExpired, FileNotFoundError):
-            logger.warning("⚠️ PostgreSQL not found, using SQLite fallback")
+            logger.error("❌ PostgreSQL not found")
+            raise
         
         # Initialize database
         try:

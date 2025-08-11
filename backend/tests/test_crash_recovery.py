@@ -16,8 +16,7 @@ import json
 from datetime import datetime
 from unittest.mock import patch, MagicMock
 
-from backend.core.progress_tracker import SQLiteProgressTracker
-from backend.core.database import DatabaseManager
+from backend.core.progress_tracker import PostgresProgressTracker
 from backend.core.base import ProcessingResult
 
 
@@ -42,8 +41,7 @@ class TestCrashRecovery(unittest.TestCase):
                 f.write(b'fake_image_data_for_crash_test')
             self.test_images.append(image_path)
         
-        self.progress_tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=3)
-        self.db_manager = DatabaseManager(self.db_path)
+        self.progress_tracker = PostgresProgressTracker(checkpoint_interval=3)
     
     def tearDown(self):
         """Clean up test environment."""
@@ -91,7 +89,7 @@ class TestCrashRecovery(unittest.TestCase):
         
         # Try to create a new progress tracker (should handle corruption gracefully)
         try:
-            new_tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=3)
+            new_tracker = PostgresProgressTracker(checkpoint_interval=3)
             
             # Should be able to create new sessions even if old data is corrupted
             new_session_id = new_tracker.create_session(
@@ -108,7 +106,7 @@ class TestCrashRecovery(unittest.TestCase):
             if os.path.exists(self.db_path):
                 os.remove(self.db_path)
             
-            recovery_tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=3)
+            recovery_tracker = PostgresProgressTracker(checkpoint_interval=3)
             recovery_session_id = recovery_tracker.create_session(
                 input_folder=self.input_dir,
                 output_folder=self.output_dir,
@@ -205,8 +203,8 @@ class TestCrashRecovery(unittest.TestCase):
         )
         
         # Simulate concurrent access by creating multiple trackers
-        tracker1 = SQLiteProgressTracker(self.db_path, checkpoint_interval=3)
-        tracker2 = SQLiteProgressTracker(self.db_path, checkpoint_interval=3)
+        tracker1 = PostgresProgressTracker(checkpoint_interval=3)
+        tracker2 = PostgresProgressTracker(checkpoint_interval=3)
         
         # Try to save checkpoints from both trackers simultaneously
         results1 = []
@@ -537,7 +535,7 @@ class TestCrashRecovery(unittest.TestCase):
         # (session remains in 'running' state)
         
         # Create new tracker instance (simulating restart after crash)
-        new_tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=3)
+        new_tracker = PostgresProgressTracker(checkpoint_interval=3)
         
         # Should be able to find and resume the session
         resumable_sessions = new_tracker.get_resumable_sessions()
