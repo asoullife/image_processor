@@ -155,10 +155,10 @@ async def test_cli_system():
     print("\n" + "=" * 50)
     print("🎉 CLI and Configuration System Test Complete!")
     print("\nTo test the CLI manually, try these commands:")
-    print("  python main.py -h                    # Show help")
-    print("  python main.py config --show         # Show current config")
-    print("  python main.py health --check        # Check system health")
-    print("  python main.py config --optimize     # Auto-optimize settings")
+    print("  python backend/main.py -h                    # Show help")
+    print("  python backend/main.py config --show         # Show current config")
+    print("  python backend/main.py health --check        # Check system health")
+    print("  python backend/main.py config --optimize     # Auto-optimize settings")
 
 if __name__ == "__main__":
     asyncio.run(test_cli_system())

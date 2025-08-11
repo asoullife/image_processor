@@ -1186,6 +1186,13 @@ def main():
         '--config',
         help='Path to configuration file (optional)'
     )
+
+    # Server command
+    server_parser = subparsers.add_parser('server', help='Start API server')
+    server_parser.add_argument('--host', default='127.0.0.1', help='Host to bind to')
+    server_parser.add_argument('--port', type=int, default=8000, help='Port to bind to')
+    server_parser.add_argument('--reload', action='store_true', help='Enable auto-reload')
+    server_parser.add_argument('--config', help='Path to configuration file (optional)')
     
     args = parser.parse_args()
     
@@ -1236,6 +1243,9 @@ def main():
                 processor.cleanup_old_sessions(args.cleanup)
             else:
                 sessions_parser.print_help()
+
+        elif args.command == 'server':
+            start_api_server(host=args.host, port=args.port, reload=args.reload, config_path=args.config)
             
     except KeyboardInterrupt:
         print("\nOperation interrupted by user")

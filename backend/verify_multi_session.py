@@ -4,9 +4,11 @@
 import sys
 from pathlib import Path
 
-# Add backend to path
+# Add backend and repo root to path
 backend_path = Path(__file__).parent
+repo_root = backend_path.parent
 sys.path.insert(0, str(backend_path))
+sys.path.insert(0, str(repo_root))
 
 def verify_implementation():
     """Verify that all multi-session components are properly implemented."""
@@ -105,7 +107,7 @@ def verify_implementation():
     print("\n🗄️ Check 5: Database Schema")
     total_checks += 1
     try:
-        from database.alembic.versions.initial_database_schema_001 import upgrade, downgrade
+        from infra.migrations.versions.001_initial_database_schema import upgrade, downgrade
         
         # Check that migration functions exist
         assert upgrade is not None, "Migration upgrade function not found"

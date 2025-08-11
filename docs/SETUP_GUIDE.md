@@ -207,7 +207,7 @@ python demo_config_validation.py
 
 2. **Run basic test**
    ```bash
-   python main.py test_input test_output
+   python backend/main.py process test_input test_output
    ```
 
 3. **Check results**
@@ -224,7 +224,7 @@ python demo_config_validation.py
 
 2. **Run processing**
    ```bash
-   python main.py /path/to/your/images /path/to/output
+   python backend/main.py process /path/to/your/images /path/to/output
    ```
 
 3. **Monitor progress**

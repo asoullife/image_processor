@@ -6,8 +6,9 @@ import os
 import sys
 from pathlib import Path
 
-# Add backend to path
+# Add backend and repo root to path
 backend_path = Path(__file__).parent.parent
+repo_root = backend_path.parent
 sys.path.insert(0, str(backend_path))
 
 from alembic.config import Config
@@ -20,7 +21,7 @@ async def run_migrations():
     """Run Alembic database migrations."""
     try:
         # Get the alembic.ini path
-        alembic_cfg_path = backend_path / "alembic.ini"
+        alembic_cfg_path = repo_root / "infra" / "alembic.ini"
         
         if not alembic_cfg_path.exists():
             raise FileNotFoundError(f"Alembic config not found: {alembic_cfg_path}")
@@ -28,8 +29,8 @@ async def run_migrations():
         # Create Alembic config
         alembic_cfg = Config(str(alembic_cfg_path))
         
-        # Set the script location relative to backend directory
-        alembic_cfg.set_main_option("script_location", str(backend_path / "database" / "alembic"))
+        # Set the script location
+        alembic_cfg.set_main_option("script_location", str(repo_root / "infra" / "migrations"))
         
         # Set database URL from environment
         database_url = os.getenv(
@@ -65,7 +66,7 @@ async def create_migration(message: str):
     """
     try:
         # Get the alembic.ini path
-        alembic_cfg_path = backend_path / "alembic.ini"
+        alembic_cfg_path = repo_root / "infra" / "alembic.ini"
         
         if not alembic_cfg_path.exists():
             raise FileNotFoundError(f"Alembic config not found: {alembic_cfg_path}")
@@ -73,8 +74,8 @@ async def create_migration(message: str):
         # Create Alembic config
         alembic_cfg = Config(str(alembic_cfg_path))
         
-        # Set the script location relative to backend directory
-        alembic_cfg.set_main_option("script_location", str(backend_path / "database" / "alembic"))
+        # Set the script location
+        alembic_cfg.set_main_option("script_location", str(repo_root / "infra" / "migrations"))
         
         # Set database URL from environment
         database_url = os.getenv(
@@ -98,7 +99,7 @@ async def check_migration_status():
     """Check current migration status."""
     try:
         # Get the alembic.ini path
-        alembic_cfg_path = backend_path / "alembic.ini"
+        alembic_cfg_path = repo_root / "infra" / "alembic.ini"
         
         if not alembic_cfg_path.exists():
             raise FileNotFoundError(f"Alembic config not found: {alembic_cfg_path}")
@@ -106,8 +107,8 @@ async def check_migration_status():
         # Create Alembic config
         alembic_cfg = Config(str(alembic_cfg_path))
         
-        # Set the script location relative to backend directory
-        alembic_cfg.set_main_option("script_location", str(backend_path / "database" / "alembic"))
+        # Set the script location
+        alembic_cfg.set_main_option("script_location", str(repo_root / "infra" / "migrations"))
         
         # Set database URL from environment
         database_url = os.getenv(

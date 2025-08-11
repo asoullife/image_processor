@@ -13,9 +13,10 @@ adobe-stock-processor/
 │   ├── core/              # Core processing logic
 │   ├── analyzers/         # AI/ML image analysis modules
 │   ├── utils/             # Backend utilities
-│   ├── database/          # Database models and migrations
+│   ├── database/          # Database models
 │   └── main.py           # Backend entry point
 ├── frontend/              # Next.js frontend (to be implemented)
+├── infra/                 # Docker, environment, migrations
 ├── data/                  # Unified data directory
 │   ├── input/            # Test input images
 │   ├── output/           # Processing results
@@ -27,8 +28,6 @@ adobe-stock-processor/
 ├── docs/                  # Documentation
 ├── reports/               # Generated reports
 ├── logs/                  # Application logs
-├── main.py               # Main entry point (delegates to backend)
-├── docker-compose.yml    # Docker orchestration
 └── README.md             # This file
 ```
 
@@ -79,19 +78,19 @@ adobe-stock-processor/
    ```
 3. **Configure environment**
    ```bash
-   cp .env.sample .env
+   cp infra/.env.sample .env
    # edit DATABASE_URL if your Postgres credentials differ
    ```
 
 4. **Run with Docker (Recommended)**
    ```bash
-   docker-compose up -d
+   (cd infra && docker-compose up -d)
    ```
 
 5. **Or run locally**
    ```bash
    # Start backend
-   python main.py
+   python backend/main.py server
 
    # Access web interface at http://localhost:3000
    ```
@@ -100,16 +99,16 @@ adobe-stock-processor/
 
 ```bash
 # Process images (legacy CLI)
-python main.py process input_folder output_folder
+python backend/main.py process input_folder output_folder
 
 # Resume interrupted processing
-python main.py resume
+python backend/main.py resume
 
-# Start web interface
-python main.py web --start
+# Start API server
+python backend/main.py server
 
 # Show all options
-python main.py --help
+python backend/main.py --help
 ```
 
 ## Development
@@ -191,13 +190,13 @@ The application includes a complete Docker setup:
 
 ```bash
 # Start all services
-docker-compose up -d
+(cd infra && docker-compose up -d)
 
 # View logs
-docker-compose logs -f
+(cd infra && docker-compose logs -f)
 
 # Stop services
-docker-compose down
+(cd infra && docker-compose down)
 ```
 
 Services included:
@@ -222,7 +221,7 @@ The system maintains backward compatibility with existing scripts and demos:
 
 ```bash
 # Legacy processing (still works)
-python main.py process input_folder output_folder
+python backend/main.py process input_folder output_folder
 
 # Demo scripts (moved to demos/)
 python demos/demo_quality_analyzer.py
@@ -253,7 +252,7 @@ python tools/fix_imports.py
 
 3. **Database Connection Issues**
    ```bash
-   docker-compose up postgres redis
+   (cd infra && docker-compose up postgres redis)
    ```
 
 4. **Performance Issues**
