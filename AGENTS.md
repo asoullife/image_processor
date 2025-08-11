@@ -6,17 +6,24 @@ This repository is under an incremental refactor. Follow these guardrails for an
 - Python 3.11+
 - Node 18+
 - Install backend dependencies: `pip install -r requirements.txt`
-- Install frontend dependencies: `npm install` (run from `frontend`)
+- Install frontend dependencies: run `npm install` in `frontend`
 - Copy `infra/.env.sample` to `.env` and adjust values as needed
+
+### Environment Variables
+From `infra/.env.sample`:
+- `DATABASE_URL=postgresql://postgres:postgres@localhost:5432/stockdb`
+- `REDIS_URL=redis://localhost:6379`
+- `NEXT_PUBLIC_API_URL=http://localhost:8000`
+- `NEXT_PUBLIC_WS_URL=ws://localhost:8000`
 
 ## Commands
 - Run tests before committing: `pytest`
-- Start backend: `uvicorn backend.main:app --reload`
-- Start frontend: `npm run dev`
-- Start services with Docker: `docker-compose up -d` (from `infra` directory)
+- Start backend: `python backend/main.py server --reload`
+- Start frontend: `(cd frontend && npm run dev)`
+- Start services with Docker: `(cd infra && docker-compose up -d)`
 
 ## Database
-- **PostgreSQL only.** The app should run against a local Docker PostgreSQL instance.
+- **PostgreSQL only.** The app must run against a local Docker PostgreSQL instance.
 - Remove or migrate any SQLite or other database references.
 
 ## Contribution Guidelines
