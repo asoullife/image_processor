@@ -1,38 +1,27 @@
 # Refactor Roadmap
 
 ## Inventory of Suspected Unused / Duplicate Files
-- `demos/` – standalone demo scripts
-- `scripts/` – multiple utility/report scripts (`create_csv_report.py`, `create_html_dashboard.py`, etc.)
-- Root docs left from earlier tasks: `FINAL_INTEGRATION_SUMMARY.md`, `TASK_31_IMPLEMENTATION_SUMMARY.md`, `TASK_32_IMPLEMENTATION_SUMMARY.md`, `PROJECT_STRUCTURE.md`
-- Windows helper scripts: `setup_postgres.bat`, `docker_commands.bat`
-- Environment artifacts: `.kiro/`, `.venv/`, `test_results/`
-
-## Database References
-- PostgreSQL configs: `infra/docker-compose.yml`, `backend/database/connection.py`, `infra/migrations/*`
-- Goal: consolidate on PostgreSQL via Docker and remove any legacy database references.
-
-## Proposed Canonical Layout
-```
-/ backend  - FastAPI application
-/ frontend - Next.js interface
-/ infra    - docker-compose, environment files, migrations
-```
+- `test_basic_functionality.py` – empty placeholder
+- `run_final_integration_tests.py`, `validate_all_requirements.py` – standalone scripts duplicating pytest
+- `requirements-minimal.txt` – overlaps with `requirements.txt`
+- `docs/FINAL_INTEGRATION_SUMMARY.md` and other legacy docs
+- `backend/RESUME_RECOVERY_IMPLEMENTATION.md` and similar design notes
+- `backend/start_server.py` – duplicates server startup logic in `backend/main.py`
 
 ## Step-by-Step PR Plan
-1. **Remove legacy database helpers and tests**
-   - Delete legacy helper scripts and related tests.
-   - Update `backend/database/connection.py` to rely solely on PostgreSQL.
-2. **Prune demo and report scripts**
-   - Delete `demos/` contents and unused scripts in `scripts/`.
-3. **Cleanup legacy docs and artifacts**
-   - Remove task summary files, `.kiro/`, `test_results/`, and Windows `.bat` helpers.
-4. **Introduce `/infra` directory**
-   - Move `docker-compose.yml`, deployment scripts, and environment samples into `infra/`.
-5. **Consolidate database configuration**
-   - Create single DB config module; update tests and README to point to Postgres.
-6. **Rationalize test suite**
-   - Remove redundant tests and ensure remaining tests rely on Postgres fixtures.
-7. **Document standard development workflow**
-   - Update README and docs with canonical commands and layout.
+1. **Cleanup root test helpers**
+   - Remove `test_basic_functionality.py`, `run_final_integration_tests.py`, and `validate_all_requirements.py`.
+2. **Consolidate dependency manifests**
+   - Drop `requirements-minimal.txt` and ensure `requirements.txt` covers development and runtime.
+3. **Unify backend startup**
+   - Merge `start_server.py` functionality into `backend/main.py` or use a single entry point; update docs accordingly.
+4. **Prune outdated documentation**
+   - Delete legacy design docs like `docs/FINAL_INTEGRATION_SUMMARY.md` and `backend/RESUME_RECOVERY_IMPLEMENTATION.md`.
+5. **Organize tests**
+   - Move remaining root-level tests into `backend/tests` and group by feature.
+6. **Enforce PostgreSQL**
+   - Audit for any SQLite or file-based database usage and migrate to PostgreSQL adapters.
+7. **Document workflow**
+   - Update README and docs with final run commands, environment variables, and architecture notes.
 
 Each PR should change ≤300 lines and include test runs.
