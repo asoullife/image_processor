@@ -1,0 +1,36 @@
+# FastAPI and API dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# Database dependencies
+sqlalchemy[asyncio]==2.0.23
+asyncpg==0.29.0
+alembic==1.12.1
+
+# Authentication and security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# Session management
+redis==5.0.1
+aioredis==2.0.1
+
+# Socket.IO for real-time communication
+python-socketio==5.10.0
+
+# Performance monitoring
+psutil==5.9.6
+GPUtil==1.4.0
+
+# Validation and serialization
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# HTTP client for testing
+httpx==0.25.2
+
+# Development dependencies
+pytest==7.4.3
+pytest-asyncio==0.21.1

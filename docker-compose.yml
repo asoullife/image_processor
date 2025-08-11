@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: adobe_stock_postgres
+    environment:
+      POSTGRES_DB: adobe_stock_processor
+      POSTGRES_USER: adobe_stock_user
+      POSTGRES_PASSWORD: adobe_stock_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - adobe_stock_network
+
+  # Redis for Socket.IO and caching
+  redis:
+    image: redis:7-alpine
+    container_name: adobe_stock_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - adobe_stock_network
+
+  # Python FastAPI Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: adobe_stock_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://adobe_stock_user:adobe_stock_password@postgres:5432/adobe_stock_processor
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - adobe_stock_network
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: adobe_stock_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_WS_URL=ws://localhost:8000
+    volumes:
+    depends_on:
+      - backend
+    networks:
+      - adobe_stock_network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  adobe_stock_network:
+    driver: bridge

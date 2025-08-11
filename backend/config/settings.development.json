@@ -1,0 +1,73 @@
+{
+  "processing": {
+    "batch_size": 50,
+    "max_workers": 2,
+    "checkpoint_interval": 10,
+    "memory_limit_mb": 2048,
+    "enable_gpu": false
+  },
+  "quality": {
+    "min_sharpness": 50.0,
+    "max_noise_level": 0.2,
+    "min_resolution": [800, 600],
+    "max_resolution": [4096, 4096],
+    "min_file_size_kb": 100,
+    "max_file_size_mb": 20,
+    "required_color_depth": 24,
+    "check_compression_artifacts": false
+  },
+  "defect_detection": {
+    "enabled": true,
+    "confidence_threshold": 0.5,
+    "max_defects_allowed": 2,
+    "check_object_integrity": false,
+    "detect_watermarks": false,
+    "edge_detection_sensitivity": 0.5
+  },
+  "similarity": {
+    "hash_threshold": 8,
+    "feature_threshold": 0.7,
+    "clustering_eps": 0.4,
+    "min_cluster_size": 2,
+    "max_similar_images": 10,
+    "enable_deep_features": false,
+    "similarity_algorithms": ["phash", "dhash"]
+  },
+  "compliance": {
+    "logo_detection_confidence": 0.5,
+    "face_detection_enabled": false,
+    "face_detection_confidence": 0.5,
+    "license_plate_detection": false,
+    "metadata_validation": false,
+    "keyword_relevance_threshold": 0.3,
+    "check_adult_content": false,
+    "check_violence": false,
+    "cultural_sensitivity_check": false
+  },
+  "output": {
+    "images_per_folder": 50,
+    "preserve_metadata": true,
+    "generate_thumbnails": false,
+    "thumbnail_size": [150, 150],
+    "copy_original_structure": false,
+    "create_backup": true,
+    "compression_quality": 85
+  },
+  "reporting": {
+    "generate_excel": true,
+    "generate_html": false,
+    "generate_json": true,
+    "include_thumbnails": false,
+    "detailed_analysis": false,
+    "performance_metrics": true,
+    "export_rejected_list": true
+  },
+  "logging": {
+    "level": "DEBUG",
+    "file_logging": true,
+    "console_logging": true,
+    "max_log_size_mb": 10,
+    "backup_count": 3,
+    "log_performance": true
+  }
+}

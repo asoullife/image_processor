@@ -1,0 +1,23 @@
+# Adobe Stock Image Processor - Minimal Dependencies
+# Essential packages only - install others as needed
+
+# Core image processing
+Pillow>=10.0.0
+numpy>=1.24.0
+
+# Data processing
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# Progress tracking
+tqdm>=4.65.0
+
+# System monitoring
+psutil>=5.9.0
+
+# Report generation
+matplotlib>=3.7.0
+jinja2>=3.1.0
+
+# Testing
+pytest>=7.4.0

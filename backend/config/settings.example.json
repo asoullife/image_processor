@@ -1,0 +1,159 @@
+{
+  "_comment": "Adobe Stock Image Processor Configuration Example",
+  "_description": "This file shows all available configuration options with explanations",
+  
+  "version": "1.1",
+  "_version_comment": "Configuration schema version - automatically managed",
+  
+  "processing": {
+    "_comment": "Image processing and batch management settings",
+    
+    "batch_size": 200,
+    "_batch_size_comment": "Number of images per batch (1-10000). Higher = more memory usage, potentially faster",
+    
+    "max_workers": 4,
+    "_max_workers_comment": "Maximum worker threads (1-32). Recommend 1-2x CPU cores",
+    
+    "checkpoint_interval": 50,
+    "_checkpoint_interval_comment": "Save progress every N images (1-1000). Lower = better resume, more I/O"
+  },
+  
+  "quality": {
+    "_comment": "Image quality analysis thresholds",
+    
+    "min_sharpness": 100.0,
+    "_min_sharpness_comment": "Minimum sharpness score (≥0). Typical range: 50-200. Higher = more strict",
+    
+    "max_noise_level": 0.1,
+    "_max_noise_level_comment": "Maximum noise level (0-1). 0=no noise, 1=max noise. Lower = more strict",
+    
+    "min_resolution": [1920, 1080],
+    "_min_resolution_comment": "Minimum [width, height] pixels. Adobe Stock typically needs high resolution"
+  },
+  
+  "similarity": {
+    "_comment": "Duplicate and similar image detection settings",
+    
+    "hash_threshold": 5,
+    "_hash_threshold_comment": "Perceptual hash distance (0-64). Lower = detect more similar images",
+    
+    "feature_threshold": 0.85,
+    "_feature_threshold_comment": "Deep learning similarity (0-1). Higher = detect more similar images",
+    
+    "clustering_eps": 0.3,
+    "_clustering_eps_comment": "DBSCAN clustering parameter (0-2). Lower = tighter clusters"
+  },
+  
+  "compliance": {
+    "_comment": "Adobe Stock compliance and legal checking",
+    
+    "logo_detection_confidence": 0.7,
+    "_logo_detection_confidence_comment": "Logo detection threshold (0-1). Higher = fewer false positives",
+    
+    "face_detection_enabled": true,
+    "_face_detection_enabled_comment": "Enable face detection for privacy compliance",
+    
+    "metadata_validation": true,
+    "_metadata_validation_comment": "Validate EXIF data and keywords"
+  },
+  
+  "decision": {
+    "_comment": "Decision engine weights and thresholds - weights must sum to 1.0",
+    
+    "quality_weight": 0.35,
+    "_quality_weight_comment": "Weight for quality analysis (0-1)",
+    
+    "defect_weight": 0.25,
+    "_defect_weight_comment": "Weight for defect detection (0-1)",
+    
+    "similarity_weight": 0.20,
+    "_similarity_weight_comment": "Weight for similarity analysis (0-1)",
+    
+    "compliance_weight": 0.15,
+    "_compliance_weight_comment": "Weight for compliance checking (0-1)",
+    
+    "technical_weight": 0.05,
+    "_technical_weight_comment": "Weight for technical specs (0-1)",
+    
+    "_thresholds_comment": "All thresholds are 0-1 scores",
+    
+    "approval_threshold": 0.75,
+    "_approval_threshold_comment": "Overall score needed for automatic approval",
+    
+    "rejection_threshold": 0.40,
+    "_rejection_threshold_comment": "Overall score below which images are rejected",
+    
+    "quality_min_threshold": 0.60,
+    "_quality_min_threshold_comment": "Minimum quality score required",
+    
+    "defect_max_threshold": 0.30,
+    "_defect_max_threshold_comment": "Maximum defect score allowed",
+    
+    "similarity_max_threshold": 0.85,
+    "_similarity_max_threshold_comment": "Maximum similarity score allowed",
+    
+    "compliance_min_threshold": 0.80,
+    "_compliance_min_threshold_comment": "Minimum compliance score required",
+    
+    "_critical_thresholds_comment": "Critical thresholds override other decisions",
+    
+    "quality_critical_threshold": 0.30,
+    "_quality_critical_threshold_comment": "Quality below this = always reject",
+    
+    "defect_critical_threshold": 0.70,
+    "_defect_critical_threshold_comment": "Defects above this = always reject",
+    
+    "compliance_critical_threshold": 0.50,
+    "_compliance_critical_threshold_comment": "Compliance below this = always reject"
+  },
+  
+  "output": {
+    "_comment": "Output file organization settings",
+    
+    "images_per_folder": 200,
+    "_images_per_folder_comment": "Images per subfolder (1-10000). Adobe Stock batch upload recommendation",
+    
+    "preserve_metadata": true,
+    "_preserve_metadata_comment": "Keep original EXIF data and keywords",
+    
+    "generate_thumbnails": true,
+    "_generate_thumbnails_comment": "Create thumbnail images for HTML reports"
+  },
+  
+  "logging": {
+    "_comment": "Application logging configuration",
+    
+    "level": "INFO",
+    "_level_comment": "Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL",
+    
+    "file": "adobe_stock_processor.log",
+    "_file_comment": "Log file name (relative to app directory)",
+    
+    "max_file_size": "10MB",
+    "_max_file_size_comment": "Max log size before rotation (format: number + B/KB/MB/GB/TB)",
+    
+    "backup_count": 5,
+    "_backup_count_comment": "Number of backup log files to keep (0-100)"
+  },
+  
+  "_usage_examples": {
+    "_comment": "Common configuration scenarios",
+    
+    "_high_quality_strict": {
+      "quality": {"min_sharpness": 150, "max_noise_level": 0.05},
+      "decision": {"quality_weight": 0.5, "approval_threshold": 0.8}
+    },
+    
+    "_fast_processing": {
+      "processing": {"batch_size": 500, "max_workers": 8, "checkpoint_interval": 100}
+    },
+    
+    "_memory_constrained": {
+      "processing": {"batch_size": 50, "max_workers": 2}
+    },
+    
+    "_compliance_focused": {
+      "decision": {"compliance_weight": 0.4, "compliance_min_threshold": 0.9}
+    }
+  }
+}

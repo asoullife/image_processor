@@ -1,0 +1,21 @@
+{
+  "processing": {
+    "performance_mode": "balanced",
+    "batch_size": 30,
+    "max_workers": 6,
+    "gpu_enabled": true,
+    "memory_limit_gb": 12.0,
+    "quality_threshold": 0.8,
+    "similarity_threshold": 0.85
+  },
+  "system": {
+    "log_level": "INFO",
+    "auto_cleanup": true,
+    "backup_checkpoints": true
+  },
+  "ui": {
+    "theme": "light",
+    "language": "th",
+    "auto_refresh_interval": 5000
+  }
+}

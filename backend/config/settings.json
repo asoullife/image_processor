@@ -1,0 +1,50 @@
+{
+  "version": "1.1",
+  "processing": {
+    "batch_size": 200,
+    "max_workers": 4,
+    "checkpoint_interval": 50
+  },
+  "quality": {
+    "min_sharpness": 100.0,
+    "max_noise_level": 0.1,
+    "min_resolution": [1920, 1080]
+  },
+  "similarity": {
+    "hash_threshold": 5,
+    "feature_threshold": 0.85,
+    "clustering_eps": 0.3
+  },
+  "compliance": {
+    "logo_detection_confidence": 0.7,
+    "face_detection_enabled": true,
+    "metadata_validation": true
+  },
+  "decision": {
+    "quality_weight": 0.35,
+    "defect_weight": 0.25,
+    "similarity_weight": 0.20,
+    "compliance_weight": 0.15,
+    "technical_weight": 0.05,
+    "approval_threshold": 0.75,
+    "rejection_threshold": 0.40,
+    "quality_min_threshold": 0.60,
+    "defect_max_threshold": 0.30,
+    "similarity_max_threshold": 0.85,
+    "compliance_min_threshold": 0.80,
+    "quality_critical_threshold": 0.30,
+    "defect_critical_threshold": 0.70,
+    "compliance_critical_threshold": 0.50
+  },
+  "output": {
+    "images_per_folder": 200,
+    "preserve_metadata": true,
+    "generate_thumbnails": true
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "adobe_stock_processor.log",
+    "max_file_size": "10MB",
+    "backup_count": 5
+  }
+}

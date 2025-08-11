@@ -1,0 +1,48 @@
+{
+  "test_suite": "Core Integration Tests",
+  "timestamp": "2025-08-12T01:15:24.198269",
+  "summary": {
+    "total_tests": 6,
+    "passed": 3,
+    "failed": 3,
+    "success_rate": 50.0
+  },
+  "test_results": {
+    "project_structure": {
+      "passed": true,
+      "details": "All required directories exist",
+      "missing_dirs": []
+    },
+    "imports": {
+      "passed": false,
+      "details": "Failed imports: [('backend.api.main', 'Form data requires \"python-multipart\" to be installed. \\nYou can install \"python-multipart\" with: \\n\\npip install python-multipart\\n')]",
+      "failed_imports": [
+        [
+          "backend.api.main",
+          "Form data requires \"python-multipart\" to be installed. \nYou can install \"python-multipart\" with: \n\npip install python-multipart\n"
+        ]
+      ]
+    },
+    "configuration": {
+      "passed": true,
+      "details": "Configuration system working correctly"
+    },
+    "database_models": {
+      "passed": false,
+      "details": "Database models error: cannot import name 'User' from 'backend.database.models' (D:\\Work\\Dev\\private\\a2\\aao\\aao\\backend\\database\\models.py)"
+    },
+    "api_structure": {
+      "passed": false,
+      "details": "API structure error: Form data requires \"python-multipart\" to be installed. \nYou can install \"python-multipart\" with: \n\npip install python-multipart\n"
+    },
+    "frontend_structure": {
+      "passed": true,
+      "details": "Frontend structure correct"
+    }
+  },
+  "failed_tests": [
+    "imports",
+    "database_models",
+    "api_structure"
+  ]
+}

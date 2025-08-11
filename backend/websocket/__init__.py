@@ -1,0 +1,1 @@
+"""WebSocket and real-time communication module."""
