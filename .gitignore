@@ -30,6 +30,7 @@ env/
 ENV/
 env.bak/
 venv.bak/
+.venv/
 
 # IDE
 .vscode/
@@ -62,6 +63,7 @@ adobe_stock_*.html
 adobe_stock_*.xlsx
 adobe_stock_*.csv
 adobe_stock_*.txt
+test_results/
 
 # Data directories
 data/input/*
@@ -97,6 +99,7 @@ out/
 temp/
 tmp/
 *.tmp
+.kiro/
 
 # AI/ML models
 *.pt

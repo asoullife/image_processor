@@ -1,6 +1,5 @@
 """PostgreSQL database connection management."""
 
-import asyncio
 import logging
 from typing import AsyncGenerator, Optional
 from contextlib import asynccontextmanager
@@ -12,14 +11,10 @@ import os
 logger = logging.getLogger(__name__)
 
 # Database configuration
-# Try PostgreSQL first, fallback to SQLite for development
 DATABASE_URL = os.getenv(
-    "DATABASE_URL", 
+    "DATABASE_URL",
     "postgresql+asyncpg://admin:admin123@localhost:5432/adobe_stock_processor"
 )
-
-# Alternative SQLite URL for development
-SQLITE_URL = "sqlite+aiosqlite:///./adobe_stock_processor.db"
 
 # SQLAlchemy setup
 Base = declarative_base()
