@@ -13,7 +13,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - adobe_stock_network
 
@@ -31,7 +31,7 @@ services:
   # Python FastAPI Backend
   backend:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: Dockerfile
     container_name: adobe_stock_backend
     ports:
@@ -40,7 +40,7 @@ services:
       - DATABASE_URL=postgresql://adobe_stock_user:adobe_stock_password@postgres:5432/adobe_stock_processor
       - REDIS_URL=redis://redis:6379
     volumes:
-      - ./data:/app/data
+      - ../data:/app/data
     depends_on:
       - postgres
       - redis
@@ -50,7 +50,7 @@ services:
   # Next.js Frontend
   frontend:
     build:
-      context: ./frontend
+      context: ../frontend
       dockerfile: Dockerfile
     container_name: adobe_stock_frontend
     ports:

@@ -7,13 +7,13 @@ This repository is under an incremental refactor. Follow these guardrails for an
 - Node 18+
 - Install backend dependencies: `pip install -r requirements.txt`
 - Install frontend dependencies: `npm install` (run from `frontend`)
-- Copy `.env.sample` to `.env` and adjust values as needed
+- Copy `infra/.env.sample` to `.env` and adjust values as needed
 
 ## Commands
 - Run tests before committing: `pytest`
 - Start backend: `uvicorn backend.main:app --reload`
 - Start frontend: `npm run dev`
-- Start services with Docker: `docker-compose up -d`
+- Start services with Docker: `docker-compose up -d` (from `infra` directory)
 
 ## Database
 - **PostgreSQL only.** The app should run against a local Docker PostgreSQL instance.
@@ -26,4 +26,4 @@ This repository is under an incremental refactor. Follow these guardrails for an
 - Stay within the canonical repo layout:
   - `/backend` – FastAPI application
   - `/frontend` – Next.js web client
-  - `/infra` – Docker and infrastructure configs
+  - `/infra` – Docker, environment samples, and migrations

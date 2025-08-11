@@ -246,11 +246,11 @@ class InstallationTester:
         """Test that the main application can be imported and basic help works"""
         try:
             # Test importing main module
-            import main
+            import backend.main as main
             self.log_test("Main application import", True, "Main module imported successfully")
-            
+
             # Test command line help
-            result = subprocess.run([sys.executable, "main.py", "--help"], 
+            result = subprocess.run([sys.executable, "backend/main.py", "--help"],
                                   capture_output=True, text=True, timeout=10)
             
             if result.returncode == 0 and "usage:" in result.stdout.lower():

@@ -50,7 +50,7 @@ def verify_implementation():
     
     # Check database schema
     print("\n🗄️  Database Schema:")
-    schema_file = backend_path / "database" / "alembic" / "versions" / "001_initial_database_schema.py"
+    schema_file = backend_path.parent / "infra" / "migrations" / "versions" / "001_initial_database_schema.py"
     if schema_file.exists():
         with open(schema_file, 'r') as f:
             content = f.read()

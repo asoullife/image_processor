@@ -107,7 +107,7 @@ def test_database_connection_structure():
 def test_alembic_migration():
     """Test that Alembic migration exists and is structured correctly."""
     try:
-        migration_file = backend_path / "database" / "alembic" / "versions" / "001_initial_database_schema.py"
+        migration_file = backend_path.parent / "infra" / "migrations" / "versions" / "001_initial_database_schema.py"
         
         if not migration_file.exists():
             print("❌ Alembic migration file not found")

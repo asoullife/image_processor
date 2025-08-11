@@ -387,14 +387,14 @@ class TestMainApplicationCLI(unittest.TestCase):
         shutil.rmtree(self.test_dir, ignore_errors=True)
     
     @patch('main.ImageProcessor')
-    @patch('sys.argv', ['main.py', 'process', 'input', 'output'])
+    @patch('sys.argv', ['backend/main.py', 'process', 'input', 'output'])
     def test_cli_process_command(self, mock_processor_class):
         """Test CLI process command."""
         mock_processor = MagicMock()
         mock_processor.run.return_value = True
         mock_processor_class.return_value = mock_processor
         
-        from main import main
+        from backend.main import main
         
         # Should not raise exception
         with self.assertRaises(SystemExit) as cm:
@@ -407,14 +407,14 @@ class TestMainApplicationCLI(unittest.TestCase):
         mock_processor.run.assert_called_once_with('input', 'output', False)
     
     @patch('main.ImageProcessor')
-    @patch('sys.argv', ['main.py', 'process', 'input', 'output', '--resume'])
+    @patch('sys.argv', ['backend/main.py', 'process', 'input', 'output', '--resume'])
     def test_cli_process_command_with_resume(self, mock_processor_class):
         """Test CLI process command with resume flag."""
         mock_processor = MagicMock()
         mock_processor.run.return_value = True
         mock_processor_class.return_value = mock_processor
         
-        from main import main
+        from backend.main import main
         
         with self.assertRaises(SystemExit) as cm:
             main()
@@ -423,38 +423,38 @@ class TestMainApplicationCLI(unittest.TestCase):
         mock_processor.run.assert_called_once_with('input', 'output', True)
     
     @patch('main.ImageProcessor')
-    @patch('sys.argv', ['main.py', 'sessions', '--list'])
+    @patch('sys.argv', ['backend/main.py', 'sessions', '--list'])
     def test_cli_sessions_list_command(self, mock_processor_class):
         """Test CLI sessions list command."""
         mock_processor = MagicMock()
         mock_processor_class.return_value = mock_processor
         
-        from main import main
+        from backend.main import main
         main()
         
         mock_processor.list_sessions.assert_called_once_with(None)
     
     @patch('main.ImageProcessor')
-    @patch('sys.argv', ['main.py', 'sessions', '--info', 'test_session'])
+    @patch('sys.argv', ['backend/main.py', 'sessions', '--info', 'test_session'])
     def test_cli_sessions_info_command(self, mock_processor_class):
         """Test CLI sessions info command."""
         mock_processor = MagicMock()
         mock_processor_class.return_value = mock_processor
         
-        from main import main
+        from backend.main import main
         main()
         
         mock_processor.get_session_info.assert_called_once_with('test_session')
     
     @patch('main.ImageProcessor')
-    @patch('sys.argv', ['main.py', 'sessions', '--recover', 'test_session'])
+    @patch('sys.argv', ['backend/main.py', 'sessions', '--recover', 'test_session'])
     def test_cli_sessions_recover_command(self, mock_processor_class):
         """Test CLI sessions recover command."""
         mock_processor = MagicMock()
         mock_processor.recover_session.return_value = True
         mock_processor_class.return_value = mock_processor
         
-        from main import main
+        from backend.main import main
         
         with self.assertRaises(SystemExit) as cm:
             main()
@@ -463,13 +463,13 @@ class TestMainApplicationCLI(unittest.TestCase):
         mock_processor.recover_session.assert_called_once_with('test_session')
     
     @patch('main.ImageProcessor')
-    @patch('sys.argv', ['main.py', 'sessions', '--cleanup', '7'])
+    @patch('sys.argv', ['backend/main.py', 'sessions', '--cleanup', '7'])
     def test_cli_sessions_cleanup_command(self, mock_processor_class):
         """Test CLI sessions cleanup command."""
         mock_processor = MagicMock()
         mock_processor_class.return_value = mock_processor
         
-        from main import main
+        from backend.main import main
         main()
         
         mock_processor.cleanup_old_sessions.assert_called_once_with(7)

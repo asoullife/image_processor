@@ -125,8 +125,8 @@ class RequirementsValidator:
         details = []
         
         try:
-            # Check main.py exists and has CLI support
-            main_py = self.project_root / "main.py"
+            # Check backend main.py exists and has CLI support
+            main_py = self.project_root / "backend" / "main.py"
             if main_py.exists():
                 details.append("✅ Main entry point exists")
                 
@@ -543,7 +543,7 @@ class RequirementsValidator:
                 details.append("❌ Frontend settings interface missing")
             
             # Check CLI help system
-            main_py = self.project_root / "main.py"
+            main_py = self.project_root / "backend" / "main.py"
             if main_py.exists():
                 content = main_py.read_text()
                 if "-h" in content or "help" in content:
@@ -697,7 +697,7 @@ class RequirementsValidator:
             
             # Check root directory is clean
             root_files = list(self.project_root.glob("*"))
-            essential_files = ["main.py", "README.md", "docker-compose.yml", ".gitignore"]
+            essential_files = ["README.md", ".gitignore", "backend", "frontend", "infra"]
             
             clean_root = len([f for f in root_files if f.is_file()]) <= 10  # Allow some flexibility
             if clean_root:

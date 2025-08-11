@@ -10,7 +10,8 @@ from alembic import context
 
 # Add the backend directory to the path
 import sys
-backend_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+backend_path = os.path.join(project_root, "backend")
 sys.path.insert(0, backend_path)
 
 # Import your models here

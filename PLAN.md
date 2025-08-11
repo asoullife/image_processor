@@ -8,14 +8,14 @@
 - Environment artifacts: `.kiro/`, `.venv/`, `test_results/`
 
 ## Database References
-- PostgreSQL configs: `docker-compose.yml`, `backend/database/connection.py`, `backend/database/alembic/*`
+- PostgreSQL configs: `infra/docker-compose.yml`, `backend/database/connection.py`, `infra/migrations/*`
 - Goal: consolidate on PostgreSQL via Docker and remove any legacy database references.
 
 ## Proposed Canonical Layout
 ```
 / backend  - FastAPI application
 / frontend - Next.js interface
-/ infra    - docker-compose, deployment scripts, environment files
+/ infra    - docker-compose, environment files, migrations
 ```
 
 ## Step-by-Step PR Plan
