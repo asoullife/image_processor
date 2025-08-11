@@ -33,9 +33,6 @@ import { BulkActions } from "@/components/review/BulkActions";
 import { SimilarityViewer } from "@/components/review/SimilarityViewer";
 import { SimilarityConfig } from "@/components/review/SimilarityConfig";
 import { ReviewFilters } from "@/components/review/ReviewFilters";
-import { SimilarityViewer } from "@/components/review/SimilarityViewer";
-import { BulkActions } from "@/components/review/BulkActions";
-import { ReviewStats } from "@/components/review/ReviewStats";
 
 interface ReviewFilters {
   decision?: "approved" | "rejected" | "pending";
@@ -53,10 +50,10 @@ interface FilterOptions {
 }
 
 export default function ReviewPage() {
-  const params = useParams();
+  const params = useParams<{ id: string }>();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const projectId = params.id as string;
+  const projectId = params?.id as string;
 
   // State
   const [filters, setFilters] = useState<ReviewFilters>({});
