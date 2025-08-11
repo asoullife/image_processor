@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, Zap, Balance, Brain, Info } from "lucide-react";
+import { Settings, Zap, Scale, Brain, Info } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -99,7 +99,7 @@ export function SimilarityConfig({ sessionId, onClose }: SimilarityConfigProps) 
   const getUseCaseIcon = (useCase: string) => {
     switch (useCase) {
       case "strict": return <Zap className="w-5 h-5 text-red-500" />;
-      case "balanced": return <Balance className="w-5 h-5 text-blue-500" />;
+      case "balanced": return <Scale className="w-5 h-5 text-blue-500" />;
       case "lenient": return <Brain className="w-5 h-5 text-green-500" />;
       default: return <Settings className="w-5 h-5" />;
     }

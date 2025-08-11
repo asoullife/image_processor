@@ -54,8 +54,8 @@ const getStatusBadge = (status: string) => {
 };
 
 export default function ProjectDetailPage() {
-  const params = useParams();
-  const projectId = params.id as string;
+  const params = useParams<{ id: string }>();
+  const projectId = params?.id as string;
 
   const progressPercentage = (mockProject.processedImages / mockProject.totalImages) * 100;
   const approvalRate = mockProject.processedImages > 0 
