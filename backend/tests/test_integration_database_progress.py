@@ -5,12 +5,9 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import unittest
-import tempfile
-import os
 from datetime import datetime
 
-from backend.core.database import DatabaseManager
-from backend.core.progress_tracker import SQLiteProgressTracker
+from backend.core.progress_tracker import PostgresProgressTracker
 from backend.core.base import ProcessingResult, QualityResult
 
 
@@ -19,18 +16,11 @@ class TestDatabaseProgressIntegration(unittest.TestCase):
     
     def setUp(self):
         """Set up test environment."""
-        self.temp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')
-        self.temp_db.close()
-        self.db_path = self.temp_db.name
-        
-        # Create both components using same database
-        self.db_manager = DatabaseManager(self.db_path)
-        self.progress_tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=3)
+        self.progress_tracker = PostgresProgressTracker(checkpoint_interval=3)
     
     def tearDown(self):
         """Clean up test database."""
-        if os.path.exists(self.db_path):
-            os.unlink(self.db_path)
+        pass
     
     def test_complete_workflow_with_resume(self):
         """Test complete workflow including interruption and resume."""

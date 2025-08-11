@@ -6,12 +6,10 @@
 - Root docs left from earlier tasks: `FINAL_INTEGRATION_SUMMARY.md`, `TASK_31_IMPLEMENTATION_SUMMARY.md`, `TASK_32_IMPLEMENTATION_SUMMARY.md`, `PROJECT_STRUCTURE.md`
 - Windows helper scripts: `setup_postgres.bat`, `docker_commands.bat`
 - Environment artifacts: `.kiro/`, `.venv/`, `test_results/`
-- SQLite helpers: `backend/use_sqlite.py`, `backend/test_with_sqlite.py`, `backend/core/database.py`
 
 ## Database References
 - PostgreSQL configs: `docker-compose.yml`, `backend/database/connection.py`, `backend/database/alembic/*`
-- SQLite usage: `backend/use_sqlite.py`, `backend/test_with_sqlite.py`, `scripts/*report*.py`, `backend/core/database.py`, various tests under `backend/tests`
-- Goal: consolidate on PostgreSQL via Docker; remove SQLite and other DB references.
+- Goal: consolidate on PostgreSQL via Docker and remove any legacy database references.
 
 ## Proposed Canonical Layout
 ```
@@ -21,9 +19,9 @@
 ```
 
 ## Step-by-Step PR Plan
-1. **Remove SQLite helpers and tests**
-   - Delete `backend/use_sqlite.py`, `backend/test_with_sqlite.py`, related tests.
-   - Update `backend/database/connection.py` to drop SQLite fallback.
+1. **Remove legacy database helpers and tests**
+   - Delete legacy helper scripts and related tests.
+   - Update `backend/database/connection.py` to rely solely on PostgreSQL.
 2. **Prune demo and report scripts**
    - Delete `demos/` contents and unused scripts in `scripts/`.
 3. **Cleanup legacy docs and artifacts**

@@ -77,13 +77,18 @@ adobe-stock-processor/
    ```bash
    pip install -r requirements.txt
    ```
+3. **Configure environment**
+   ```bash
+   cp .env.sample .env
+   # edit DATABASE_URL if your Postgres credentials differ
+   ```
 
-3. **Run with Docker (Recommended)**
+4. **Run with Docker (Recommended)**
    ```bash
    docker-compose up -d
    ```
 
-4. **Or run locally**
+5. **Or run locally**
    ```bash
    # Start backend
    python main.py

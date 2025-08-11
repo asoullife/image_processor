@@ -5,25 +5,20 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import unittest
-import tempfile
-import os
 import json
 from datetime import datetime, timedelta
 from unittest.mock import patch, MagicMock
 
-from backend.core.progress_tracker import SQLiteProgressTracker
+from backend.core.progress_tracker import PostgresProgressTracker
 from backend.core.base import ProcessingResult, QualityResult, DefectResult, ComplianceResult
 
 
-class TestSQLiteProgressTracker(unittest.TestCase):
-    """Test cases for SQLiteProgressTracker class."""
+class TestPostgresProgressTracker(unittest.TestCase):
+    """Test cases for PostgresProgressTracker class."""
     
     def setUp(self):
         """Set up test progress tracker."""
-        self.temp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')
-        self.temp_db.close()
-        self.db_path = self.temp_db.name
-        self.tracker = SQLiteProgressTracker(self.db_path, checkpoint_interval=5)
+        self.tracker = PostgresProgressTracker(checkpoint_interval=5)
         
         # Test data
         self.test_input_folder = "/test/input"
@@ -33,8 +28,7 @@ class TestSQLiteProgressTracker(unittest.TestCase):
     
     def tearDown(self):
         """Clean up test database."""
-        if os.path.exists(self.db_path):
-            os.unlink(self.db_path)
+        pass
     
     def test_create_session(self):
         """Test creating a new session."""

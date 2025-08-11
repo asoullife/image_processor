@@ -25,7 +25,7 @@ try:
     from backend.config.config_loader import load_config, AppConfig
     from backend.utils.logger import initialize_logging, get_logger, ProgressLogger
     from backend.core.base import ErrorHandler
-    from backend.core.progress_tracker import SQLiteProgressTracker
+    from backend.core.progress_tracker import PostgresProgressTracker
     from backend.core.batch_processor import BatchProcessor
     from backend.utils.file_manager import FileManager
     from backend.analyzers.quality_analyzer import QualityAnalyzer
@@ -40,7 +40,7 @@ except ImportError:
     from config.config_loader import load_config, AppConfig
     from utils.logger import initialize_logging, get_logger, ProgressLogger
     from core.base import ErrorHandler
-    from core.progress_tracker import SQLiteProgressTracker
+    from core.progress_tracker import PostgresProgressTracker
     from core.batch_processor import BatchProcessor
     from utils.file_manager import FileManager
     from analyzers.quality_analyzer import QualityAnalyzer
@@ -81,8 +81,7 @@ class ImageProcessor:
             if isinstance(db_path, dict):
                 db_path = None
             
-            self.progress_tracker = SQLiteProgressTracker(
-                db_path=db_path,
+            self.progress_tracker = PostgresProgressTracker(
                 checkpoint_interval=self.config.processing.checkpoint_interval
             )
             
