@@ -1,2 +1,3 @@
-def test_sanity():
+def test_sanity() -> None:
+    """Basic sanity check."""
     assert True
