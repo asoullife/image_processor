@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.performance_monitor import performance_monitor, PerformanceMonitor
 from utils.console_notifier import console_notifier, ConsoleNotificationConfig
-from websocket.socketio_manager import socketio_manager, ProgressData
+from realtime.socketio_manager import socketio_manager, ProgressData
 from core.base import ProcessingResult
 
 # Configure logging

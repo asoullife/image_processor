@@ -7,7 +7,7 @@ from datetime import datetime
 from unittest.mock import AsyncMock, MagicMock
 
 # Test the Socket.IO manager
-from ..websocket.socketio_manager import socketio_manager, ProgressData, ErrorData, CompletionData
+from ..realtime.socketio_manager import socketio_manager, ProgressData, ErrorData, CompletionData
 from ..utils.socketio_integration import ProcessingProgressBroadcaster, SocketIOProcessingIntegration
 
 class TestSocketIOManager:

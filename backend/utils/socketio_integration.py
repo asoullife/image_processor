@@ -4,7 +4,7 @@ import asyncio
 import logging
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
-from ..websocket.socketio_manager import socketio_manager, ProgressData, ErrorData, CompletionData
+from ..realtime.socketio_manager import socketio_manager, ProgressData, ErrorData, CompletionData
 
 logger = logging.getLogger(__name__)
 

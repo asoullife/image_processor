@@ -18,12 +18,12 @@ from .base import BaseProcessor, ProcessingResult, ErrorHandler
 try:
     from backend.utils.performance_monitor import performance_monitor
     from backend.utils.console_notifier import console_notifier
-    from backend.websocket.socketio_manager import socketio_manager, ProgressData
+    from backend.realtime.socketio_manager import socketio_manager, ProgressData
 except ImportError:
     # Standalone mode
     from utils.performance_monitor import performance_monitor
     from utils.console_notifier import console_notifier
-    from websocket.socketio_manager import socketio_manager, ProgressData
+    from realtime.socketio_manager import socketio_manager, ProgressData
 
 
 @dataclass

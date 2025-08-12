@@ -19,13 +19,13 @@ async def test_socketio_server():
         # Test 1: Import Socket.IO manager
         print("1. Testing Socket.IO manager import...")
         try:
-            from websocket.socketio_manager import socketio_manager, sio, ProgressData, ErrorData, CompletionData
+            from realtime.socketio_manager import socketio_manager, sio, ProgressData, ErrorData, CompletionData
             print("   ✓ Socket.IO manager imported successfully")
         except ImportError:
             # Try alternative import path
             import sys
             sys.path.append('.')
-            from websocket.socketio_manager import socketio_manager, sio, ProgressData, ErrorData, CompletionData
+            from realtime.socketio_manager import socketio_manager, sio, ProgressData, ErrorData, CompletionData
             print("   ✓ Socket.IO manager imported successfully")
         
         # Test 2: Test data models
@@ -68,10 +68,10 @@ async def test_socketio_server():
         # Test 3: Test Redis adapter
         print("3. Testing Redis adapter...")
         try:
-            from websocket.redis_adapter import redis_adapter
+            from realtime.redis_adapter import redis_adapter
             print("   ✓ Redis adapter imported successfully")
         except ImportError:
-            from websocket.redis_adapter import redis_adapter
+            from realtime.redis_adapter import redis_adapter
             print("   ✓ Redis adapter imported successfully")
         
         # Test 4: Test integration utilities

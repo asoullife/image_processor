@@ -81,7 +81,7 @@ class CoreIntegrationTest:
             "backend/analyzers",
             "backend/database",
             "backend/utils",
-            "backend/websocket",
+            "backend/realtime",
             "frontend",
             "frontend/src",
             "scripts",

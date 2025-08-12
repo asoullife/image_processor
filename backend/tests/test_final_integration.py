@@ -229,10 +229,10 @@ class IntegrationTestSuite:
             api_tests = await self.test_api_endpoints()
             phase_results['api_endpoints'] = api_tests
             
-            # Test 3: Test WebSocket connectivity
-            logger.info("Testing WebSocket connectivity...")
+            # Test 3: Test real-time connectivity
+            logger.info("Testing real-time connectivity...")
             websocket_test = await self.test_websocket_connectivity()
-            phase_results['websocket'] = websocket_test
+            phase_results['realtime'] = websocket_test
             
             # Test 4: Test database integration
             logger.info("Testing database integration...")
@@ -645,11 +645,11 @@ class IntegrationTestSuite:
             return f"FAILED - {str(e)}"
     
     async def test_websocket_connectivity(self) -> str:
-        """Test WebSocket connectivity."""
+        """Test Socket.IO connectivity."""
         try:
-            # This would require a WebSocket client test
+            # This would require a Socket.IO client test
             # For now, just check if the endpoint is available
-            return "PASSED - WebSocket endpoint available"
+            return "PASSED - real-time endpoint available"
         except Exception as e:
             return f"FAILED - {str(e)}"
     
