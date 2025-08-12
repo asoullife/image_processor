@@ -1,10 +1,10 @@
-"""WebSocket API routes for Socket.IO integration."""
+"""Real-time API routes for Socket.IO integration."""
 
 from fastapi import APIRouter, HTTPException, Depends
 from typing import Dict, List, Optional
 import logging
 
-from ...websocket.socketio_manager import socketio_manager, ProgressData, ErrorData, CompletionData
+from ...realtime.socketio_manager import socketio_manager, ProgressData, ErrorData, CompletionData
 from ..dependencies import get_database
 from ...database.models import ProcessingSession
 
@@ -121,19 +121,19 @@ async def get_cached_progress(session_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/health")
-async def websocket_health():
-    """Check WebSocket service health."""
+async def realtime_health():
+    """Check real-time service health."""
     try:
         total_sessions = len(socketio_manager.progress_cache)
         total_clients = sum(len(clients) for clients in socketio_manager.connected_clients.values())
         
         return {
             "status": "healthy",
-            "service": "websocket",
+            "service": "realtime",
             "active_sessions": total_sessions,
             "connected_clients": total_clients,
             "redis_adapter": socketio_manager.progress_cache is not None
         }
     except Exception as e:
-        logger.error(f"Error checking WebSocket health: {e}")
+        logger.error(f"Error checking real-time health: {e}")
         raise HTTPException(status_code=500, detail=str(e))

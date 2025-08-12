@@ -14,7 +14,7 @@ def test_socketio_manager():
     print("Testing Socket.IO Manager...")
     
     try:
-        from websocket.socketio_manager import ProgressData, MilestoneData, SocketIOManager
+        from realtime.socketio_manager import ProgressData, MilestoneData, SocketIOManager
         
         # Test ProgressData creation
         progress_data = ProgressData(
@@ -154,7 +154,7 @@ def test_data_structures():
     
     try:
         # Test progress data serialization
-        from websocket.socketio_manager import ProgressData, CompletionData, ErrorData
+        from realtime.socketio_manager import ProgressData, CompletionData, ErrorData
         
         progress = ProgressData(
             session_id="test",

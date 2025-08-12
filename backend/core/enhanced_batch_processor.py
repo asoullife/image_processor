@@ -16,7 +16,7 @@ from database.connection import DatabaseManager
 from core.checkpoint_manager import CheckpointManager, CheckpointType, SessionState
 from core.recovery_service import RecoveryService
 from core.services import SessionService
-from websocket.socketio_manager import socketio_manager
+from realtime.socketio_manager import socketio_manager
 from analyzers.analyzer_factory import AnalyzerFactory
 from config.config_loader import AppConfig
 

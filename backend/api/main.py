@@ -12,8 +12,8 @@ from .routes import projects, sessions, analysis, health, auth, review, thumbnai
 from .dependencies import get_database, get_config
 from ..database.connection import DatabaseManager
 from ..config.config_loader import AppConfig
-from ..websocket.socketio_manager import sio, socketio_manager
-from ..websocket.redis_adapter import redis_adapter
+from ..realtime.socketio_manager import sio, socketio_manager
+from ..realtime.redis_adapter import redis_adapter
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -32,7 +32,7 @@ app = FastAPI(
     * **Session Management**: Track processing sessions with real-time progress
     * **Image Analysis**: Quality, defect, similarity, and compliance checking
     * **Human Review**: Web-based review system for rejected images
-    * **Real-time Updates**: WebSocket support for live progress monitoring
+    * **Real-time Updates**: Socket.IO support for live progress monitoring
     
     ## Authentication
     
@@ -45,7 +45,7 @@ app = FastAPI(
     2. Login to get a session token at `/api/auth/login`
     3. Create a new project at `/api/projects/`
     4. Start processing with `/api/projects/{project_id}/start`
-    5. Monitor progress in real-time via WebSocket or polling
+    5. Monitor progress in real-time via Socket.IO or polling
     
     ## Database Schema
     
@@ -112,9 +112,9 @@ app.include_router(settings.router, tags=["settings"])
 app.include_router(reports.router, tags=["reports"])
 app.include_router(mock_reports.router, tags=["mock-reports"])
 
-# Import and include WebSocket routes
-from .routes import websocket
-app.include_router(websocket.router, prefix="/api/websocket", tags=["websocket"])
+# Import and include real-time routes
+from .routes import realtime
+app.include_router(realtime.router, prefix="/api/realtime", tags=["realtime"])
 
 @app.on_event("startup")
 async def startup_event():

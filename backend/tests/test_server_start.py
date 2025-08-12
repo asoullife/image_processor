@@ -38,7 +38,7 @@ def test_server_import():
         
         # Test Socket.IO manager
         print("4. Testing Socket.IO manager...")
-        from websocket.socketio_manager import socketio_manager, sio
+        from realtime.socketio_manager import socketio_manager, sio
         print(f"   ✓ Socket.IO manager available")
         print(f"   ✓ Socket.IO server created: {type(sio)}")
         

@@ -148,7 +148,7 @@ class RequirementsValidator:
             
             # Check real-time monitoring
             monitoring_files = [
-                self.backend_path / "websocket" / "socketio_manager.py",
+                self.backend_path / "realtime" / "socketio_manager.py",
                 self.project_root / "frontend" / "src" / "components" / "monitoring"
             ]
             
@@ -733,7 +733,7 @@ class RequirementsValidator:
         
         try:
             # Check Socket.IO backend implementation
-            socketio_manager = self.backend_path / "websocket" / "socketio_manager.py"
+            socketio_manager = self.backend_path / "realtime" / "socketio_manager.py"
             if socketio_manager.exists():
                 details.append("✅ Socket.IO backend manager exists")
                 
@@ -753,7 +753,7 @@ class RequirementsValidator:
                 details.append("❌ Frontend Socket.IO client missing")
             
             # Check Redis adapter for scaling
-            redis_adapter = self.backend_path / "websocket" / "redis_adapter.py"
+            redis_adapter = self.backend_path / "realtime" / "redis_adapter.py"
             if redis_adapter.exists():
                 details.append("✅ Redis adapter for scaling exists")
             else:
