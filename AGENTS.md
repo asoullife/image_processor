@@ -7,20 +7,13 @@ This repository is under an incremental refactor. Follow these guardrails for an
 - Node 18+
 - Install backend dependencies: `pip install -r backend/requirements.txt`
 - Install frontend dependencies: run `npm install` in `frontend`
-- Copy `infra/.env.sample` to `.env` and adjust values as needed
-
-### Environment Variables
-From `infra/.env.sample`:
-- `DATABASE_URL=postgresql://postgres:postgres@localhost:5432/stockdb`
-- `REDIS_URL=redis://localhost:6379`
-- `NEXT_PUBLIC_API_URL=http://localhost:8000`
-- `NEXT_PUBLIC_WS_URL=ws://localhost:8000`
+- Copy `backend/.env.example` and `frontend/.env.example` to `.env` in each app and adjust values as needed
 
 ## Commands
 - Run tests before committing: `pytest`
-- Start backend: `uvicorn backend.api.main:socket_app --reload`
+- Start backend: `uvicorn backend.main:app --reload`
 - Start frontend: `(cd frontend && npm run dev)`
-- Start services with Docker: `(cd infra && docker-compose up -d)`
+- Start services with Docker: `docker-compose up -d`
 
 ## Database
 - **PostgreSQL only.** The app must run against a local Docker PostgreSQL instance.
@@ -33,4 +26,4 @@ From `infra/.env.sample`:
 - Stay within the canonical repo layout:
   - `/backend` – FastAPI application
   - `/frontend` – Next.js web client
-  - `/infra` – Docker, environment samples, and migrations
+  - `/docs` – architecture and process notes
