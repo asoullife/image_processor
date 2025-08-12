@@ -7,28 +7,10 @@ A modern desktop application for analyzing and filtering large collections of im
 This application follows a clean, modern architecture:
 
 ```
-adobe-stock-processor/
-├── backend/                # Python FastAPI backend
-│   ├── api/               # REST API endpoints
-│   ├── core/              # Core processing logic
-│   ├── analyzers/         # AI/ML image analysis modules
-│   ├── utils/             # Backend utilities
-│   ├── database/          # Database models
-│   └── main.py           # Backend entry point
-├── frontend/              # Next.js frontend (to be implemented)
-├── infra/                 # Docker, environment, migrations
-├── data/                  # Unified data directory
-│   ├── input/            # Test input images
-│   ├── output/           # Processing results
-│   └── temp/             # Temporary files
-├── tools/                 # Development and utility tools
-├── scripts/               # Processing and report scripts
-├── demos/                 # Demo applications
-├── tests/                 # Test suite
-├── docs/                  # Documentation
-├── reports/               # Generated reports
-├── logs/                  # Application logs
-└── README.md             # This file
+image_processor/
+├── backend/   # FastAPI backend and workers
+├── frontend/  # Next.js web client
+└── infra/     # Docker compose, migrations, env samples
 ```
 
 ## Features
@@ -90,7 +72,7 @@ adobe-stock-processor/
 5. **Or run locally**
    ```bash
    # Start backend
-   python backend/main.py server
+   uvicorn backend.api.main:socket_app --reload
 
    # Access web interface at http://localhost:3000
    ```
@@ -105,7 +87,7 @@ python backend/main.py process input_folder output_folder
 python backend/main.py resume
 
 # Start API server
-python backend/main.py server
+uvicorn backend.api.main:socket_app --reload
 
 # Show all options
 python backend/main.py --help

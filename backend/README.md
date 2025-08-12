@@ -63,10 +63,10 @@ export DATABASE_URL="postgresql+asyncpg://postgres:postgres@localhost:5432/stock
 
 ```bash
 # Start FastAPI server
-python backend/main.py server
+uvicorn backend.api.main:socket_app --reload
 
 # Or with custom options
-python backend/main.py server --host 0.0.0.0 --port 8000 --reload
+uvicorn backend.api.main:socket_app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ### 4. Access API Documentation
@@ -166,7 +166,7 @@ python -c "from backend.database.migrations import run_migrations; import asynci
 
 ```bash
 # Start with auto-reload
-python backend/main.py server --reload
+uvicorn backend.api.main:socket_app --reload
 ```
 
 ## Environment Variables
@@ -185,7 +185,7 @@ The backend maintains compatibility with the existing CLI interface:
 python backend/main.py process --input /path/to/images --output /path/to/output
 
 # API server mode (new functionality)
-python backend/main.py server --port 8000
+uvicorn backend.api.main:socket_app --port 8000
 ```
 
 ## Next Steps

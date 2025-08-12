@@ -18,7 +18,7 @@ From `infra/.env.sample`:
 
 ## Commands
 - Run tests before committing: `pytest`
-- Start backend: `python backend/main.py server --reload`
+- Start backend: `uvicorn backend.api.main:socket_app --reload`
 - Start frontend: `(cd frontend && npm run dev)`
 - Start services with Docker: `(cd infra && docker-compose up -d)`
 
