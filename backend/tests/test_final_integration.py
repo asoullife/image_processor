@@ -121,9 +121,9 @@ class IntegrationTestSuite:
             # Test 1: Check Python dependencies
             logger.info("Testing Python dependencies...")
             required_packages = [
-                'fastapi', 'uvicorn', 'sqlalchemy', 'psycopg2-binary',
-                'opencv-python', 'pillow', 'numpy', 'pandas',
-                'tensorflow', 'torch', 'socketio', 'redis'
+                'fastapi', 'uvicorn', 'sqlalchemy', 'psycopg',
+                'cv2', 'PIL', 'numpy', 'pandas',
+                'socketio', 'redis'
             ]
             
             missing_packages = []

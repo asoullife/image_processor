@@ -162,9 +162,9 @@ class IntegrationTestRunner:
         
         # Backend dependencies
         backend_deps = [
-            'fastapi', 'uvicorn', 'sqlalchemy', 'psycopg2-binary',
-            'opencv-python', 'pillow', 'numpy', 'pandas',
-            'python-socketio', 'redis', 'pytest'
+            'fastapi', 'uvicorn', 'sqlalchemy', 'psycopg',
+            'cv2', 'PIL', 'numpy', 'pandas',
+            'socketio', 'redis', 'pytest'
         ]
         
         missing_deps = []

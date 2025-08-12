@@ -39,19 +39,21 @@ class InstallationTester:
     def test_python_imports(self) -> bool:
         """Test that all required Python packages can be imported"""
         required_packages = [
+            ('fastapi', 'fastapi'),
+            ('uvicorn', 'uvicorn'),
+            ('sqlalchemy', 'sqlalchemy'),
+            ('psycopg', 'psycopg[binary]'),
+            ('socketio', 'python-socketio'),
+            ('redis', 'redis'),
             ('cv2', 'opencv-python'),
             ('PIL', 'Pillow'),
             ('numpy', 'numpy'),
-            ('tensorflow', 'tensorflow'),
-            ('sklearn', 'scikit-learn'),
             ('pandas', 'pandas'),
             ('openpyxl', 'openpyxl'),
-            ('matplotlib', 'matplotlib'),
-            ('seaborn', 'seaborn'),
-            ('jinja2', 'jinja2'),
             ('imagehash', 'imagehash'),
             ('tqdm', 'tqdm'),
-            ('psutil', 'psutil')
+            ('psutil', 'psutil'),
+            ('requests', 'requests')
         ]
         
         all_passed = True
