@@ -9,22 +9,24 @@ This module implements comprehensive image similarity detection including:
 - Group recommendation logic for duplicate detection
 """
 
+from backend.ml import runtime
+
+probe = runtime.probe()
+tf = probe.tf
+cv2 = probe.cv2
+
 try:
-    import cv2
     import numpy as np
     from PIL import Image
     import imagehash
-    import tensorflow as tf
     from sklearn.cluster import DBSCAN
     from sklearn.metrics.pairwise import cosine_similarity
     from sklearn.preprocessing import StandardScaler
 except ImportError:
     # Handle missing dependencies gracefully for testing
-    cv2 = None
     np = None
     Image = None
     imagehash = None
-    tf = None
     DBSCAN = None
     cosine_similarity = None
     StandardScaler = None

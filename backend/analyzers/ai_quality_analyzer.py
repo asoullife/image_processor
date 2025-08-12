@@ -16,22 +16,22 @@ from typing import Dict, Any, Optional, Tuple, Union, List
 from dataclasses import dataclass
 from pathlib import Path
 
+from backend.ml import runtime
+
+probe = runtime.probe()
+tf = probe.tf
+cv2 = probe.cv2
+TF_AVAILABLE = tf is not None
+CV2_AVAILABLE = cv2 is not None
+
 try:
-    import tensorflow as tf
-    import cv2
     import numpy as np
     from PIL import Image
-    TF_AVAILABLE = True
-    CV2_AVAILABLE = True
     PIL_AVAILABLE = True
 except ImportError as e:
-    logging.warning(f"AI/ML dependencies not available: {e}")
-    tf = None
-    cv2 = None
+    logging.warning(f"Optional dependencies not available: {e}")
     np = None
     Image = None
-    TF_AVAILABLE = False
-    CV2_AVAILABLE = False
     PIL_AVAILABLE = False
 
 from .ai_model_manager import AIModelManager
