@@ -17,39 +17,39 @@ from typing import Dict, Any, Optional, Tuple, Union, List
 from dataclasses import dataclass
 from pathlib import Path
 
+from backend.ml import runtime
+
+probe = runtime.probe()
+tf = probe.tf
+cv2 = probe.cv2
+TF_AVAILABLE = tf is not None
+CV2_AVAILABLE = cv2 is not None
+
 try:
-    import tensorflow as tf
     import torch
     import clip
-    import cv2
     import numpy as np
     from PIL import Image
     import imagehash
     from sklearn.cluster import DBSCAN
     from sklearn.metrics.pairwise import cosine_similarity
     from sklearn.preprocessing import StandardScaler
-    TF_AVAILABLE = True
     TORCH_AVAILABLE = True
     CLIP_AVAILABLE = True
-    CV2_AVAILABLE = True
     PIL_AVAILABLE = True
     SKLEARN_AVAILABLE = True
 except ImportError as e:
     logging.warning(f"AI/ML dependencies not available: {e}")
-    tf = None
     torch = None
     clip = None
-    cv2 = None
     np = None
     Image = None
     imagehash = None
     DBSCAN = None
     cosine_similarity = None
     StandardScaler = None
-    TF_AVAILABLE = False
     TORCH_AVAILABLE = False
     CLIP_AVAILABLE = False
-    CV2_AVAILABLE = False
     PIL_AVAILABLE = False
     SKLEARN_AVAILABLE = False
 

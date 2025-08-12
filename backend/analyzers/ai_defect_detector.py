@@ -17,26 +17,24 @@ from typing import Dict, Any, Optional, Tuple, Union, List
 from dataclasses import dataclass
 from pathlib import Path
 
+from backend.ml import runtime
+
+probe = runtime.probe()
+YOLO = probe.yolo.YOLO if probe.yolo else None
+tf = probe.tf
+cv2 = probe.cv2
+YOLO_AVAILABLE = probe.yolo is not None
+TF_AVAILABLE = tf is not None
+CV2_AVAILABLE = cv2 is not None
+
 try:
-    from ultralytics import YOLO
-    import tensorflow as tf
-    import cv2
     import numpy as np
     from PIL import Image
-    YOLO_AVAILABLE = True
-    TF_AVAILABLE = True
-    CV2_AVAILABLE = True
     PIL_AVAILABLE = True
 except ImportError as e:
-    logging.warning(f"AI/ML dependencies not available: {e}")
-    YOLO = None
-    tf = None
-    cv2 = None
+    logging.warning(f"Optional dependencies not available: {e}")
     np = None
     Image = None
-    YOLO_AVAILABLE = False
-    TF_AVAILABLE = False
-    CV2_AVAILABLE = False
     PIL_AVAILABLE = False
 
 from .ai_model_manager import AIModelManager
@@ -208,7 +206,7 @@ class AIDefectDetector:
             traditional_result = self.traditional_detector.analyze(image_path)
             
             # Attempt AI-enhanced analysis
-            if YOLO_AVAILABLE and self.model_manager.is_model_available('yolov8n'):
+            if YOLO_AVAILABLE:
                 ai_result = self._analyze_with_ai(image_path, traditional_result)
                 processing_time = time.time() - start_time
                 ai_result.processing_time = processing_time
@@ -236,12 +234,9 @@ class AIDefectDetector:
             AIDefectResult with AI enhancements
         """
         try:
-            # Get YOLO model
-            yolo_model = self.model_manager.get_model('yolov8n')
-            if yolo_model is None:
-                logger.warning("YOLO model not available, using fallback")
-                return self._create_fallback_result(traditional_result, 0.0)
-            
+            # Get YOLO model via runtime
+            yolo_model = runtime.get_detector('yolov8n')
+
             # Run YOLO detection
             yolo_results = yolo_model(image_path, conf=self.ai_thresholds['yolo_confidence'])
             
