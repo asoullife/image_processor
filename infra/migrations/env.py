@@ -35,12 +35,16 @@ target_metadata = Base.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
-def get_database_url():
-    """Get database URL from environment or config."""
-    return os.getenv(
-        "DATABASE_URL",
-        "postgresql+asyncpg://postgres:password@localhost:5432/adobe_stock_processor"
-    )
+def get_database_url() -> str:
+    """Get normalized database URL from environment."""
+    database_url = os.getenv("DATABASE_URL")
+    if not database_url:
+        raise RuntimeError("DATABASE_URL is not set.")
+    if database_url.startswith("postgresql://"):
+        database_url = database_url.replace(
+            "postgresql://", "postgresql+asyncpg://", 1
+        )
+    return database_url
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
