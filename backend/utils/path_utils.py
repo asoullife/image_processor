@@ -31,19 +31,6 @@ def get_backend_root() -> Path:
     return backend_root
 
 
-def get_database_path(db_name: str = "adobe_stock_processor.db") -> str:
-    """Get the database path relative to project root.
-    
-    Args:
-        db_name: Name of the database file.
-        
-    Returns:
-        str: Absolute path to the database file.
-    """
-    project_root = get_project_root()
-    return str(project_root / db_name)
-
-
 def get_reports_dir() -> str:
     """Get the reports directory path relative to project root.
     

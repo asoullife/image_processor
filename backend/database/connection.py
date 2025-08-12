@@ -13,10 +13,11 @@ logger = logging.getLogger(__name__)
 
 # Database configuration
 load_dotenv()
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql+asyncpg://postgres:postgres@localhost:5432/stockdb"
-)
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is not set.")
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
 
 # SQLAlchemy setup
 Base = declarative_base()
@@ -44,16 +45,12 @@ class DatabaseManager:
         
         try:
             # Create async engine with enhanced connection pooling
-            connect_args = {}
-            
-            # PostgreSQL-specific settings
-            if "postgresql" in self.database_url:
-                connect_args = {
-                    "server_settings": {
-                        "application_name": "adobe_stock_processor_api",
-                        "jit": "off"  # Disable JIT for better connection performance
-                    }
+            connect_args = {
+                "server_settings": {
+                    "application_name": "adobe_stock_processor_api",
+                    "jit": "off"  # Disable JIT for better connection performance
                 }
+            }
             
             self.engine = create_async_engine(
                 self.database_url,

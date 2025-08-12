@@ -3,17 +3,16 @@ version: '3.8'
 services:
   # PostgreSQL Database
   postgres:
-    image: postgres:15
+    image: postgres:16
     container_name: adobe_stock_postgres
     environment:
-      POSTGRES_DB: adobe_stock_processor
-      POSTGRES_USER: adobe_stock_user
-      POSTGRES_PASSWORD: adobe_stock_password
+      POSTGRES_DB: stockdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ../backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - adobe_stock_network
 
@@ -37,7 +36,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://adobe_stock_user:adobe_stock_password@postgres:5432/adobe_stock_processor
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stockdb
       - REDIS_URL=redis://redis:6379
     volumes:
       - ../data:/app/data

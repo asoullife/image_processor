@@ -53,10 +53,10 @@ pip install fastapi uvicorn sqlalchemy asyncpg pydantic
 sudo apt-get install postgresql postgresql-contrib
 
 # Create database
-sudo -u postgres createdb adobe_stock_processor
+sudo -u postgres createdb stockdb
 
 # Set environment variable
-export DATABASE_URL="postgresql+asyncpg://postgres:password@localhost:5432/adobe_stock_processor"
+export DATABASE_URL="postgresql+asyncpg://postgres:postgres@localhost:5432/stockdb"
 ```
 
 ### 3. Start the Server
@@ -119,7 +119,7 @@ Configuration is managed through JSON files in `backend/config/`:
     "min_resolution": [800, 600]
   },
   "database": {
-    "url": "postgresql+asyncpg://postgres:password@localhost:5432/adobe_stock_processor"
+    "url": "postgresql+asyncpg://postgres:postgres@localhost:5432/stockdb"
   }
 }
 ```

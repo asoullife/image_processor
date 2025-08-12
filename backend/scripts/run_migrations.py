@@ -17,6 +17,18 @@ from database.init_db import DatabaseInitializer
 
 logger = logging.getLogger(__name__)
 
+
+def _get_database_url() -> str:
+    """Load and normalize DATABASE_URL from environment."""
+    database_url = os.getenv("DATABASE_URL")
+    if not database_url:
+        raise RuntimeError("DATABASE_URL is not set.")
+    if database_url.startswith("postgresql://"):
+        database_url = database_url.replace(
+            "postgresql://", "postgresql+asyncpg://", 1
+        )
+    return database_url
+
 async def run_migrations():
     """Run Alembic database migrations."""
     try:
@@ -33,10 +45,7 @@ async def run_migrations():
         alembic_cfg.set_main_option("script_location", str(repo_root / "infra" / "migrations"))
         
         # Set database URL from environment
-        database_url = os.getenv(
-            "DATABASE_URL",
-            "postgresql+asyncpg://postgres:password@localhost:5432/adobe_stock_processor"
-        )
+        database_url = _get_database_url()
         alembic_cfg.set_main_option("sqlalchemy.url", database_url)
         
         logger.info("Running database migrations...")
@@ -78,10 +87,7 @@ async def create_migration(message: str):
         alembic_cfg.set_main_option("script_location", str(repo_root / "infra" / "migrations"))
         
         # Set database URL from environment
-        database_url = os.getenv(
-            "DATABASE_URL",
-            "postgresql+asyncpg://postgres:password@localhost:5432/adobe_stock_processor"
-        )
+        database_url = _get_database_url()
         alembic_cfg.set_main_option("sqlalchemy.url", database_url)
         
         logger.info(f"Creating migration: {message}")
@@ -111,10 +117,7 @@ async def check_migration_status():
         alembic_cfg.set_main_option("script_location", str(repo_root / "infra" / "migrations"))
         
         # Set database URL from environment
-        database_url = os.getenv(
-            "DATABASE_URL",
-            "postgresql+asyncpg://postgres:password@localhost:5432/adobe_stock_processor"
-        )
+        database_url = _get_database_url()
         alembic_cfg.set_main_option("sqlalchemy.url", database_url)
         
         logger.info("Checking migration status...")

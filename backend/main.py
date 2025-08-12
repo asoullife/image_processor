@@ -34,7 +34,6 @@ try:
     from backend.analyzers.compliance_checker import ComplianceChecker
     from backend.core.decision_engine import DecisionEngine
     from backend.utils.report_generator import ReportGenerator
-    from backend.utils.path_utils import get_database_path
 except ImportError:
     # Standalone mode - use relative imports
     from config.config_loader import load_config, AppConfig
@@ -49,7 +48,6 @@ except ImportError:
     from analyzers.compliance_checker import ComplianceChecker
     from core.decision_engine import DecisionEngine
     from utils.report_generator import ReportGenerator
-    from utils.path_utils import get_database_path
 
 
 class ImageProcessor:
@@ -77,10 +75,6 @@ class ImageProcessor:
             self._setup_signal_handlers()
             
             # Initialize core components
-            db_path = getattr(self.config, 'database', {}).get('path', None)
-            if isinstance(db_path, dict):
-                db_path = None
-            
             self.progress_tracker = PostgresProgressTracker(
                 checkpoint_interval=self.config.processing.checkpoint_interval
             )
