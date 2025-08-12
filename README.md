@@ -74,7 +74,7 @@ adobe-stock-processor/
 
 2. **Install Python dependencies**
    ```bash
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
 3. **Configure environment**
    ```bash
@@ -247,7 +247,7 @@ python tools/fix_imports.py
 
 2. **Missing Dependencies**
    ```bash
-   pip install -r requirements.txt --upgrade
+   pip install -r backend/requirements.txt --upgrade
    ```
 
 3. **Database Connection Issues**

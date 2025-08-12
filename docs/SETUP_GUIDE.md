@@ -70,7 +70,7 @@ This guide provides detailed instructions for setting up and configuring the Ado
 
 1. **Install Python dependencies**
    ```bash
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
 
 2. **Create configuration**
@@ -285,7 +285,7 @@ python demo_config_validation.py
 ```bash
 # Solution: Upgrade pip and try again
 pip install --upgrade pip
-pip install -r requirements.txt --upgrade
+pip install -r backend/requirements.txt --upgrade
 ```
 
 **Issue**: Python version too old
@@ -324,7 +324,7 @@ python --version
 **Issue**: Import errors
 ```bash
 # Solution: Reinstall dependencies
-pip install -r requirements.txt --force-reinstall
+pip install -r backend/requirements.txt --force-reinstall
 ```
 
 #### Configuration Problems
@@ -431,7 +431,7 @@ Check logs for detailed error information:
 
 1. **Update dependencies**
    ```bash
-   pip install -r requirements.txt --upgrade
+   pip install -r backend/requirements.txt --upgrade
    ```
 
 2. **Update configuration** as needed

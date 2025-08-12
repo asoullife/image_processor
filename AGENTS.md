@@ -5,7 +5,7 @@ This repository is under an incremental refactor. Follow these guardrails for an
 ## Development Setup
 - Python 3.11+
 - Node 18+
-- Install backend dependencies: `pip install -r requirements.txt`
+- Install backend dependencies: `pip install -r backend/requirements.txt`
 - Install frontend dependencies: run `npm install` in `frontend`
 - Copy `infra/.env.sample` to `.env` and adjust values as needed
 
