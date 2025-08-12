@@ -55,8 +55,8 @@ sudo apt-get install postgresql postgresql-contrib
 # Create database
 sudo -u postgres createdb stockdb
 
-# Set environment variable
-export DATABASE_URL="postgresql+asyncpg://postgres:postgres@localhost:5432/stockdb"
+# Configure environment
+cp .env.example .env  # edit DATABASE_URL if needed
 ```
 
 ### 3. Start the Server

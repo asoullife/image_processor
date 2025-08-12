@@ -5,11 +5,13 @@ import logging
 import os
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Add backend and repo root to path
 backend_path = Path(__file__).parent.parent
 repo_root = backend_path.parent
 sys.path.insert(0, str(backend_path))
+load_dotenv(backend_path / ".env")
 
 from alembic.config import Config
 from alembic import command

@@ -61,7 +61,8 @@ image_processor/
 3. **Configure environment**
    ```bash
    cp infra/.env.sample .env
-   # edit DATABASE_URL if your Postgres credentials differ
+   cp backend/.env.example backend/.env
+   # edit DATABASE_URL in backend/.env if your Postgres credentials differ
    ```
 
 4. **Run with Docker (Recommended)**
