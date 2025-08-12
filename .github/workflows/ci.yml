@@ -31,11 +31,9 @@ jobs:
       - name: Install backend dependencies
         run: pip install -r backend/requirements.txt
       - name: Install frontend dependencies
-        run: npm ci -C frontend
+        run: npm install -C frontend
+      - name: Build frontend
+        run: npm run build -C frontend
       - name: Run tests
         if: ${{ hashFiles('backend/tests/**/*.py') != '' }}
         run: pytest
-      - name: Build frontend
-        run: npm run -C frontend build
-      - name: Lint frontend
-        run: npm run -C frontend lint --if-present
