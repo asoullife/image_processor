@@ -8,6 +8,5 @@
 - `backend/tests/run_final_integration_tests.py` and `backend/tests/validate_all_requirements.py` – ad-hoc test scripts overlapping with `pytest`
 
 ## Requirements Files
-- `backend/requirements.txt` – main backend dependencies **(keep)**
-- `backend/requirements-ai.txt` – optional ML extras; consider merging or removing if unused
+- `backend/requirements.txt` – unified backend dependencies **(keep)**
 - `frontend/package.json` – frontend dependencies **(keep)**
